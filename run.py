@@ -5,7 +5,7 @@ tasks = lm_eval.get_task_list(
     "boolq",
     template_names=['yes_no_question'])
 
-tasks[0].dataset = tasks[0].dataset.filter(lambda _, i: i < 32, with_indices=True)
+tasks[0].dataset = tasks[0].dataset.filter(lambda _, i: i < 500, with_indices=True)
 def bench(model_name):
     if 't5' in model_name:
         model = lm_eval.get_model("hf-seq2seq", pretrained=model_name, device="cpu")
