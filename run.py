@@ -13,15 +13,14 @@ def bench(model_name):
         model = lm_eval.get_model("hf-causal", pretrained=model_name, device="cpu")
 
     results = lm_eval.evaluate(model=model, tasks=tasks)
-    print(results)
 
     with open(f"results/{model_name.replace('/','-')}.json", 'w') as out:
         out.write(json.dumps(results))
 
 if __name__ == '__main__':
-    bench('google/t5-small')
-    bench('google/t5-base')
-    bench('google/t5-large')
+    bench('t5-small')
+    bench('t5-base')
+    bench('t5-large')
     bench('google/flan-t5-small')
     bench('google/flan-t5-base')
     bench('google/flan-t5-large')
