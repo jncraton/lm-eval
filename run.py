@@ -3,21 +3,26 @@ import json
 
 max_checks = 10000000
 
-tasks = lm_eval.get_task_list(
-    "boolq",
-    template_names=['yes_no_question'])
+tasks = {
+    "boolq": lm_eval.get_task_list(
+        "boolq",
+        template_names=['yes_no_question'])
+}
 
-tasks[0].dataset = tasks[0].dataset.filter(lambda _, i: i < max_checks, with_indices=True)
+for task in tasks.values():
+    task[0].dataset = task[0].dataset.filter(lambda _, i: i < max_checks, with_indices=True)
 
-def bench(model_name):
+def bench(model_name, task="boolq"):
+    print(f"Running {task} benchmark on {model_name}")
+
     if 't5' in model_name or 'bart' in model_name:
         model = lm_eval.get_model("hf-seq2seq", pretrained=model_name, device="cpu")
     else:
         model = lm_eval.get_model("hf-causal", pretrained=model_name, device="cpu")
 
-    results = lm_eval.evaluate(model=model, tasks=tasks)
+    results = lm_eval.evaluate(model=model, tasks=tasks[task])
 
-    with open(f"results/{model_name.replace('/','-')}.json", 'w') as out:
+    with open(f"results/{model_name.replace('/','-')}-{task}.json", 'w') as out:
         out.write(json.dumps(results))
 
 if __name__ == '__main__':
