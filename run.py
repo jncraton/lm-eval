@@ -21,6 +21,7 @@ def bench(model_name):
         out.write(json.dumps(results))
 
 if __name__ == '__main__':
+    bench('google/mt5-small')
     bench('facebook/bart-base')
     bench('t5-small')
     bench('t5-base')
