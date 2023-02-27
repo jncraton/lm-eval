@@ -1,1 +1,4 @@
+transformers
+accelerate
+torch
 git+https://github.com/bigscience-workshop/lm-evaluation-harness
