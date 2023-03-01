@@ -1,6 +1,7 @@
 import lm_eval
 import json
 import os
+import csv
 
 max_checks = 10000000
 
@@ -33,18 +34,6 @@ def bench(model_name, task="boolq"):
         out.write(json.dumps(results))
 
 if __name__ == '__main__':
-    bench('google/mt5-small')
-    bench('facebook/bart-base')
-    bench('t5-small')
-    bench('t5-base')
-    bench('t5-large')
-    bench('google/flan-t5-small')
-    bench('google/flan-t5-base')
-    bench('google/flan-t5-large')
-    bench('distilgpt2')
-    bench('gpt2')
-    bench('gpt2-medium')
-    bench('gpt2-large')
-    bench('EleutherAI/gpt-neo-125M')
-    bench('gpt2-xl')
-    bench('EleutherAI/gpt-neo-1.3B')
+    for model in csv.DictReader(open('open-models.csv')):
+        if int(model['params']) <= 1000:
+            bench(model['model'])
