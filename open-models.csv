@@ -17,7 +17,6 @@ date,model,params,instruct,multi,base,paper
 2020/10/01,google/mt5-large,1200,,y,google/mt5-base,https://arxiv.org/abs/2010.11934
 2020/10/01,google/mt5-xl,3700,,y,google/mt5-base,https://arxiv.org/abs/2010.11934
 2020/10/01,google/mt5-xxl,13000,,y,google/mt5-base,https://arxiv.org/abs/2010.11934
-2021/03/01,BAAI/glm-base,110,,,BAAI/glm-base,https://arxiv.org/pdf/2103.10360.pdf
 2021/03/01,BAAI/glm-large,340,,,BAAI/glm-base,https://arxiv.org/pdf/2103.10360.pdf
 2021/03/21,EleutherAI/gpt-neo-125M,350,,,EleutherAI/gpt-neo-125M,https://zenodo.org/record/5297715
 2021/03/21,EleutherAI/gpt-neo-1.3B,1300,,,EleutherAI/gpt-neo-125M,https://zenodo.org/record/5297715
@@ -56,7 +55,6 @@ date,model,params,instruct,multi,base,paper
 2022/05/02,facebook/opt-66b,66000,,,facebook/opt-125m,https://arxiv.org/abs/2205.01068
 2022/06/01,facebook/nllb-200-3.3B,3300,,,,https://arxiv.org/pdf/2207.04672.pdf
 2022/10/01,BAAI/glm-2b,2000,,,BAAI/glm-2b,https://arxiv.org/pdf/2210.02414v1.pdf
-2022/10/01,BAAI/glm-10b,10000,,,BAAI/glm-2b,https://arxiv.org/pdf/2210.02414v1.pdf
 2022/10/01,bigscience/bloomz-560m,560,y,y,bigscience/bloomz,https://arxiv.org/abs/2211.01786
 2022/10/01,bigscience/bloomz-1b1,1100,y,y,bigscience/bloomz,https://arxiv.org/abs/2211.01786
 2022/10/01,bigscience/bloomz-1b7,1700,y,y,bigscience/bloomz,https://arxiv.org/abs/2211.01786
