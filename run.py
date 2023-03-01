@@ -1,5 +1,6 @@
 import lm_eval
 import json
+import os
 
 max_checks = 10000000
 
@@ -13,7 +14,13 @@ for task in tasks.values():
     task[0].dataset = task[0].dataset.filter(lambda _, i: i < max_checks, with_indices=True)
 
 def bench(model_name, task="boolq"):
-    print(f"Running {task} benchmark on {model_name}")
+    outfile = f"results/{model_name.replace('/','-')}-{task}.json"
+
+    if (os.path.isfile(outfile)):
+        print(f"{task} for {model_name} already complete ({outfile})")
+        return
+    else:
+        print(f"Running {task} benchmark on {model_name}")
 
     if 't5' in model_name or 'bart' in model_name:
         model = lm_eval.get_model("hf-seq2seq", pretrained=model_name, device="cpu")
@@ -22,7 +29,7 @@ def bench(model_name, task="boolq"):
 
     results = lm_eval.evaluate(model=model, tasks=tasks[task])
 
-    with open(f"results/{model_name.replace('/','-')}-{task}.json", 'w') as out:
+    with open(outfile, 'w') as out:
         out.write(json.dumps(results))
 
 if __name__ == '__main__':
