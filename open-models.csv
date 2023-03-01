@@ -9,6 +9,7 @@ date,model,params,instruct,multi,base,paper
 2019/07/28,t5-large,770,,,t5-base,https://arxiv.org/abs/1910.10683
 2019/07/28,t5-3b,3000,,,t5-base,https://arxiv.org/abs/1910.10683
 2019/07/28,t5-11b,11000,,,t5-base,https://arxiv.org/abs/1910.10683
+2019/10/01,distilgpt2,82,,,distilgpt2,https://arxiv.org/pdf/1910.01108.pdf
 2019/10/01,facebook/bart-base,121,,,facebook/bart-base,https://arxiv.org/pdf/1910.13461.pdf
 2019/10/01,facebook/bart-large,374,,,facebook/bart-base,https://arxiv.org/pdf/1910.13461.pdf
 2020/10/01,google/mt5-small,300,,y,google/mt5-base,https://arxiv.org/abs/2010.11934
