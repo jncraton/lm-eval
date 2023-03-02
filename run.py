@@ -22,7 +22,7 @@ def bench(model_name, task="boolq"):
         print(f"{task} for {model_name} already complete ({outfile})")
         return
 
-    model_type = 'hf-seq2seq' if 't5' in model_name or 'bart' in model_name else 'hf-causal'
+    model_type = 'hf-seq2seq' if 't5' in model_name or 'bart' in model_name or 'tk' in model_name else 'hf-causal'
 
     print(f"Running {task} benchmark on {model_name} ({model_type})")
 
