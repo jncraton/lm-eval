@@ -2,6 +2,7 @@ import lm_eval
 import json
 import os
 import csv
+import torch
 
 max_checks = 10000000
 
@@ -20,13 +21,12 @@ def bench(model_name, task="boolq"):
     if (os.path.isfile(outfile)):
         print(f"{task} for {model_name} already complete ({outfile})")
         return
-    else:
-        print(f"Running {task} benchmark on {model_name}")
 
-    if 't5' in model_name or 'bart' in model_name:
-        model = lm_eval.get_model("hf-seq2seq", pretrained=model_name, device="cpu")
-    else:
-        model = lm_eval.get_model("hf-causal", pretrained=model_name, device="cpu")
+    model_type = 'hf-seq2seq' if 't5' in model_name or 'bart' in model_name else 'hf-causal'
+
+    print(f"Running {task} benchmark on {model_name} ({model_type})")
+
+    model = lm_eval.get_model(model_type, pretrained=model_name, device='cpu', dtype=torch.float32)
 
     results = lm_eval.evaluate(model=model, tasks=tasks[task])
 
