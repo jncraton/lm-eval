@@ -34,6 +34,8 @@ def bench(model_name, task="boolq"):
         out.write(json.dumps(results))
 
 if __name__ == '__main__':
-    for model in csv.DictReader(open('open-models.csv')):
-        if int(model['params']) <= 1000:
+    models = list(csv.DictReader(open('open-models.csv')))
+    models.sort(key = lambda m: int(m['params']))
+    for model in models:
+        if int(model['params']) <= 3000:
             bench(model['model'])
