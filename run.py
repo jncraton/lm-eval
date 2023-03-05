@@ -7,6 +7,9 @@ import torch
 max_checks = 10000000
 
 task_config = {
+    "cb": lm_eval.get_task_list(
+        "cb",
+        template_names=['based on the previous passage']),
     "copa": lm_eval.get_task_list(
         "copa",
         template_names=['more likely']),
@@ -18,7 +21,7 @@ task_config = {
 for task in task_config.values():
     task[0].dataset = task[0].dataset.filter(lambda _, i: i < max_checks, with_indices=True)
 
-def bench(model_name, tasks=["copa", "boolq"]):
+def bench(model_name, tasks=["cb", "copa", "boolq"]):
     for task in tasks:
         outfile = f"results/{model_name.replace('/','-')}-{task}.json"
 
