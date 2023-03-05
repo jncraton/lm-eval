@@ -7,9 +7,12 @@ import torch
 max_checks = 10000000
 
 tasks = {
+    "copa": lm_eval.get_task_list(
+        "copa",
+        template_names=['more_likely']),
     "boolq": lm_eval.get_task_list(
         "boolq",
-        template_names=['yes_no_question'])
+        template_names=['yes_no_question']),
 }
 
 for task in tasks.values():
