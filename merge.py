@@ -19,6 +19,6 @@ for file in os.listdir('results'):
             
             df.at[model, task] = acc
 
-df = df[['date', 'model', 'params', 'instruct', 'multi', 'boolq', 'base', 'paper']]
+df = df[['date', 'model', 'params', 'instruct', 'multi', 'boolq', 'copa', 'cb', 'base', 'paper']]
 
 df.to_csv('open-models-results.csv', index=False)
