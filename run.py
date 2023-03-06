@@ -6,32 +6,39 @@ import torch
 
 max_checks = 10000000
 
-tasks = {
+task_config = {
+    "cb": lm_eval.get_task_list(
+        "cb",
+        template_names=['based on the previous passage']),
+    "copa": lm_eval.get_task_list(
+        "copa",
+        template_names=['more likely']),
     "boolq": lm_eval.get_task_list(
         "boolq",
-        template_names=['yes_no_question'])
+        template_names=['yes_no_question']),
 }
 
-for task in tasks.values():
+for task in task_config.values():
     task[0].dataset = task[0].dataset.filter(lambda _, i: i < max_checks, with_indices=True)
 
-def bench(model_name, task="boolq"):
-    outfile = f"results/{model_name.replace('/','-')}-{task}.json"
+def bench(model_name, tasks=["cb", "copa", "boolq"]):
+    for task in tasks:
+        outfile = f"results/{model_name.replace('/','-')}-{task}.json"
 
-    if (os.path.isfile(outfile)):
-        print(f"{task} for {model_name} already complete ({outfile})")
-        return
+        if (os.path.isfile(outfile)):
+            print(f"{task} for {model_name} already complete ({outfile})")
+            return
 
-    model_type = 'hf-seq2seq' if 't5' in model_name or 'bart' in model_name or 'tk' in model_name or 't0' in model_name else 'hf-causal'
+        model_type = 'hf-seq2seq' if 't5' in model_name or 'bart' in model_name or 'tk' in model_name or 't0' in model_name else 'hf-causal'
 
-    print(f"Running {task} benchmark on {model_name} ({model_type})")
+        print(f"Running {task} benchmark on {model_name} ({model_type})")
 
-    model = lm_eval.get_model(model_type, pretrained=model_name, device='cpu', dtype=torch.float32)
+        model = lm_eval.get_model(model_type, pretrained=model_name, device='cpu', dtype=torch.float32)
 
-    results = lm_eval.evaluate(model=model, tasks=tasks[task])
+        results = lm_eval.evaluate(model=model, tasks=task_config[task])
 
-    with open(outfile, 'w') as out:
-        out.write(json.dumps(results))
+        with open(outfile, 'w') as out:
+            out.write(json.dumps(results))
 
 if __name__ == '__main__':
     models = list(csv.DictReader(open('open-models.csv')))
