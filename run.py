@@ -35,7 +35,7 @@ def bench(model_name, tasks=["cb", "copa", "boolq"]):
 
         model = lm_eval.get_model(model_type, pretrained=model_name, device='cpu', dtype=torch.float32)
 
-        results = lm_eval.evaluate(model=model, tasks=task_config[task])
+        results = lm_eval.evaluate(model=model, tasks=task_config[task], num_fewshot=0)
 
         with open(outfile, 'w') as out:
             out.write(json.dumps(results))
