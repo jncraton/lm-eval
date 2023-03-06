@@ -1,5 +1,5 @@
 all:
 
 clean:
-	rm -f open-model-results.csv
+	rm -f open-models-results.csv
 	rm -rf .ipynb_checkpoints
